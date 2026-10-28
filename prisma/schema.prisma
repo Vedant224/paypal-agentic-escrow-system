@@ -1,0 +1,82 @@
+// PayPal Agentic Escrow — persistence layer
+// All monetary values are stored as integer cents to avoid floating point drift.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model EscrowContract {
+  id                     String    @id @default(uuid())
+  clientId               String
+  freelancerId           String?
+  projectRequirements    String
+  assertionsJson         String // Pretty-printed JSON array of AssertionPrimitive
+  totalBudgetCents       Int // Integer cents (e.g. 10000 = $100.00)
+  currency               String    @default("USD")
+  paypalOrderId          String?
+  paypalAuthorizationId  String?
+  authorizationExpiresAt DateTime?
+  /// DRAFT | AUTHORIZED | PARTIALLY_CAPTURED | COMPLETED | VOIDED
+  status                 String    @default("DRAFT")
+  /// Optimistic lock guarding against concurrent verification runs.
+  verificationInProgress Boolean   @default(false)
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  criteria         Criterion[]
+  captureLedger    CaptureLedger[]
+  verificationRuns VerificationRun[]
+
+  @@index([status])
+}
+
+model Criterion {
+  id               String         @id @default(uuid())
+  contractId       String
+  contract         EscrowContract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  assertionIndex   Int
+  assertionJson    String // JSON-serialized AssertionPrimitive
+  /// PENDING | PASSED | FAILED
+  status           String         @default("PENDING")
+  captureId        String?
+  captureTimestamp DateTime?
+  actualResult     String?
+  dollarValueCents Int // Integer cents allocated to this criterion
+
+  @@index([contractId])
+}
+
+model VerificationRun {
+  id            String         @id @default(uuid())
+  contractId    String
+  contract      EscrowContract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  deploymentUrl String
+  runAt         DateTime       @default(now())
+  passCount     Int
+  failCount     Int
+  resultsJson   String // JSON array of per-criterion verification results
+
+  @@index([contractId])
+}
+
+model CaptureLedger {
+  id                String         @id @default(uuid())
+  contractId        String
+  contract          EscrowContract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  captureId         String
+  amountCents       Int // Captured amount in integer cents
+  finalCapture      Boolean        @default(false)
+  capturedAt        DateTime       @default(now())
+  verificationRunId String
+  criteriaIdsJson   String // JSON array of Criterion IDs settled in this capture
+
+  @@index([contractId])
+  @@index([verificationRunId])
+}

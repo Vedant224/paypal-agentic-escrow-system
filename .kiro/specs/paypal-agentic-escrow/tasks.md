@@ -68,14 +68,14 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(schemas): single-source Zod schemas, parser, and pretty printer`
 
-- [ ] 3. Wave 3: Prisma Database Setup & Deterministic Demo Seeder
-  - [ ] 3.1 Create `prisma/schema.prisma` with integer cents and `VerificationRun` model
+- [x] 3. Wave 3: Prisma Database Setup & Deterministic Demo Seeder
+  - [x] 3.1 Create `prisma/schema.prisma` with integer cents and `VerificationRun` model
     - Define `EscrowContract` with `totalBudgetCents` (`Int`), `verificationInProgress` (`Boolean`), `authorizationExpiresAt` (`DateTime?`)
     - Define `Criterion` with `dollarValueCents` (`Int`) and `assertionIndex` (`Int`)
     - Define `VerificationRun` and `CaptureLedger` (`amountCents` `Int`)
     - Run `npx prisma migrate dev --name init` and create `lib/prisma.ts` singleton
     - _Requirements: 9.1, 9.2, 9.3, 17.1, 17.5_
-  - [ ] 3.2 Create `lib/demo-seed.ts` for idempotent demo contract seeding
+  - [x] 3.2 Create `lib/demo-seed.ts` for idempotent demo contract seeding
     - Seed the default $100.00 (`10000` cents) contract with the exact 5 assertions matching `/demo/v1-broken` and `/demo/v2-fixed`
     - _Requirements: 7.1, 7.5_
   - [ ] 3.3 Git Checkpoint: Commit and push Wave 3 to `main`
