@@ -8,7 +8,7 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
 
 ## Tasks
 
-- [ ] 0. Wave 0: Security First & Project Initialization
+- [x] 0. Wave 0: Security First & Project Initialization
   - [x] 0.1 Create `.gitignore` before `git init`
     - Exclude `.env*` (keep `!.env.example`), `node_modules/`, `.next/`, `*.db*`, `data/`, Playwright artifacts
     - _Requirements: 19.1_
@@ -28,39 +28,39 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
     - Run `npx tsc --noEmit`
     - Commit & push: `chore: security first, next.js 15 app init, and dependencies`
 
-- [ ] 1. Wave 1: Core Infrastructure Utilities (`lib/`)
-  - [ ] 1.1 Create `lib/env.ts` for startup environment variable validation
+- [x] 1. Wave 1: Core Infrastructure Utilities (`lib/`)
+  - [x] 1.1 Create `lib/env.ts` for startup environment variable validation
     - Validate `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `NEXT_PUBLIC_PAYPAL_CLIENT_ID`, `OPENAI_API_KEY`, `DATABASE_URL`, `NEXT_PUBLIC_APP_URL`, `KERNEL_WS_ENDPOINT`
     - _Requirements: 19.2_
-  - [ ] 1.2 Create `lib/errors.ts` with custom error classes and `ApiErrorResponse` interface
+  - [x] 1.2 Create `lib/errors.ts` with custom error classes and `ApiErrorResponse` interface
     - Implement `AppError`, `VerificationEngineError`, `PayPalClientError`, `BrowserConnectorError`, `ParserError`
     - Include `[fileName::functionName]` prefix and machine-readable `ErrorCode`
     - _Requirements: 16.2_
-  - [ ] 1.3 Create `lib/trace.ts` with trace ID generation and redacted structured logging
+  - [x] 1.3 Create `lib/trace.ts` with trace ID generation and redacted structured logging
     - Implement `createTraceId()`, `redact()`, and `log(level, traceId, source, message, data)`
     - Redact `secret`, `password`, `apiKey`, `authorization`, `token`
     - _Requirements: 19.3, 19.7_
-  - [ ] 1.4 Create `lib/retry.ts` and `lib/format.ts`
+  - [x] 1.4 Create `lib/retry.ts` and `lib/format.ts`
     - Implement `withRetry<T>(fn, { maxRetries, label, backoffMs })` with exponential backoff
     - Implement `formatUSD(cents: number): string` and `formatCentsToPayPalValue(cents: number): string`
     - _Requirements: 5.5, 9.1_
-  - [ ] 1.5 Create `lib/sanitize.ts` with SSRF blocklist and CSS selector sanitizer
+  - [x] 1.5 Create `lib/sanitize.ts` with SSRF blocklist and CSS selector sanitizer
     - Implement `DeploymentUrlSchema` blocking private IPs, `localhost`, and `169.254.169.254` while explicitly permitting internal `/demo/v1-broken` and `/demo/v2-fixed` routes
     - Implement `isSafeSelector(selector)` blocking `javascript:`, `expression()`, `url()`, `eval()`
     - _Requirements: 19.4, 19.5_
-  - [ ] 1.6 Git Checkpoint: Commit and push Wave 1 to `main`
+  - [x] 1.6 Git Checkpoint: Commit and push Wave 1 to `main`
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(core): startup env validation, custom errors, trace logger, retry, and demo-aware sanitize`
 
-- [ ] 2. Wave 2: Single-Source Zod Schemas, Parser & Pretty Printer
-  - [ ] 2.1 Create `lib/schemas.ts` containing all data models and API request body schemas
+- [x] 2. Wave 2: Single-Source Zod Schemas, Parser & Pretty Printer
+  - [x] 2.1 Create `lib/schemas.ts` containing all data models and API request body schemas
     - Define `AssertionPrimitiveSchema` (discriminated union of 5 variants with `SafeSelectorSchema` and `DeploymentUrlSchema`)
     - Define `EscrowContractSchema`, `AuditResultSchema`, and `ContractStatusSchema` (`DRAFT`, `AUTHORIZED`, `PARTIALLY_CAPTURED`, `COMPLETED`, `VOIDED`)
     - Define API request schemas: `CompileContractRequestSchema`, `AuditContractRequestSchema`, `CreateOrderRequestSchema`, `AuthorizeOrderRequestSchema`, `VoidOrderRequestSchema`, `VerifyAndCaptureRequestSchema`
     - Implement `validateAssertionWeights()` and `allocateCriterionCents()`
     - Re-export types in `types/index.ts`
     - _Requirements: 1.2, 1.3, 1.4, 12.1, 14.1, 14.2, 16.1, 16.4_
-  - [ ] 2.2 Create `lib/parser.ts` and `lib/pretty-printer.ts`
+  - [x] 2.2 Create `lib/parser.ts` and `lib/pretty-printer.ts`
     - Implement `parseAssertionContract(jsonString)` throwing `ParserError` on invalid JSON or schema mismatch
     - Implement `prettyPrintContract(contract)` with 2-space indentation and sorted keys
     - _Requirements: 15.1, 15.2, 15.3, 15.4, 15.5_

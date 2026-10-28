@@ -13,24 +13,30 @@ export type LogLevel = 'INFO' | 'WARN' | 'ERROR';
 const SENSITIVE_KEYS = new Set([
   'secret',
   'password',
-  'apiKey',
-  'api_key',
+  'apikey',
   'authorization',
   'token',
-  'accessToken',
-  'refreshToken',
-  'clientSecret',
-  'client_secret',
-  'paypalClientSecret',
-  'oAuthClientSecret',
+  'accesstoken',
+  'refreshtoken',
+  'clientsecret',
+  'paypalclientsecret',
+  'oauthclientsecret',
   'cookie',
-  'setCookie',
+  'setcookie',
 ]);
 
 const REDACTED = '[REDACTED]';
 
 export function createTraceId(): string {
   return randomUUID();
+}
+
+/**
+ * Normalise a key so `client_secret`, `clientSecret` and `Client-Secret` all
+ * collapse to the same comparison token.
+ */
+function normaliseKey(key: string): string {
+  return key.toLowerCase().replace(/[-_]/g, '');
 }
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
@@ -46,7 +52,7 @@ export function redact(data: Record<string, unknown>): Record<string, unknown> {
   const cleaned: Record<string, unknown> = {};
 
   for (const [key, value] of Object.entries(data)) {
-    const normalisedKey = key.toLowerCase().replace(/[-_]/g, '');
+    const normalisedKey = normaliseKey(key);
 
     if (SENSITIVE_KEYS.has(normalisedKey)) {
       cleaned[key] = REDACTED;
