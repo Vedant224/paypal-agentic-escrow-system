@@ -64,7 +64,7 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
     - Implement `parseAssertionContract(jsonString)` throwing `ParserError` on invalid JSON or schema mismatch
     - Implement `prettyPrintContract(contract)` with 2-space indentation and sorted keys
     - _Requirements: 15.1, 15.2, 15.3, 15.4, 15.5_
-  - [ ] 2.3 Git Checkpoint: Commit and push Wave 2 to `main`
+  - [x] 2.3 Git Checkpoint: Commit and push Wave 2 to `main`
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(schemas): single-source Zod schemas, parser, and pretty printer`
 
@@ -78,7 +78,7 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
   - [x] 3.2 Create `lib/demo-seed.ts` for idempotent demo contract seeding
     - Seed the default $100.00 (`10000` cents) contract with the exact 5 assertions matching `/demo/v1-broken` and `/demo/v2-fixed`
     - _Requirements: 7.1, 7.5_
-  - [ ] 3.3 Git Checkpoint: Commit and push Wave 3 to `main`
+  - [x] 3.3 Git Checkpoint: Commit and push Wave 3 to `main`
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(db): prisma schema with integer cents, verification run model, and demo seeder`
 
@@ -96,7 +96,7 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
     - Implement `executeAssertion()` using `page.request.get()` for `http_status_ok` and `getComputedStyle(el).getPropertyValue()` for `computed_style`
     - Implement `executeAssertionSafe()` with a 10-second per-assertion timeout
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 8.1, 8.2, 8.3_
-  - [ ] 4.4 Git Checkpoint: Commit and push Wave 4 to `main`
+  - [x] 4.4 Git Checkpoint: Commit and push Wave 4 to `main`
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(engine): paypal sdk v2 client, agent toolkit, and safe verification engine`
 
