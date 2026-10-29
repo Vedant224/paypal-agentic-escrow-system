@@ -11,7 +11,7 @@
 import { chromium } from 'playwright';
 import type { Page } from 'playwright';
 
-const BASE_URL = process.env.DASHBOARD_URL ?? 'http://127.0.0.1:3115';
+const BASE_URL = process.env.DASHBOARD_URL ?? 'http://127.0.0.1:3116';
 
 interface Check {
   name: string;
@@ -61,10 +61,11 @@ async function main(): Promise<void> {
     });
 
     const hydratedInfo = await page.evaluate(() => {
+      const win = window as unknown as Record<string, unknown>;
       return {
-        hasNextData: typeof (window as any).__NEXT_DATA__ !== 'undefined',
-        hasReact: typeof (window as any).React !== 'undefined',
-        hasNext: typeof (window as any).__next !== 'undefined',
+        hasNextData: typeof win.__NEXT_DATA__ !== 'undefined',
+        hasReact: typeof win.React !== 'undefined',
+        hasNext: typeof win.__next !== 'undefined',
         reactRoot: document.querySelector('[data-reactroot]') !== null,
         nextRootId: document.getElementById('__next')?.getAttribute('id'),
         scripts: Array.from(document.querySelectorAll('script[src]')).map((s) => s.getAttribute('src')),
@@ -90,11 +91,6 @@ async function main(): Promise<void> {
       }
 
       if (attempt % 15 === 0) {
-        const allConsoleOutput = await page.evaluate(() => {
-          // No direct access to console log history from page; instead print
-          // what we know.
-          return null;
-        });
         console.log(
           `Still waiting after ${attempt}s; jsErrors=${JSON.stringify(jsErrors)}; body starts: ${JSON.stringify(bodySnippet)}`,
         );

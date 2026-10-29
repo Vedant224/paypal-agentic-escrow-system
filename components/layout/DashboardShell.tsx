@@ -7,6 +7,7 @@
  * -----------------------------------------------------------------------------
  */
 'use client';
+import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { RoleHighlightToggle } from './RoleHighlightToggle';
 import type { RoleFocus } from '@/types';
@@ -58,7 +59,7 @@ export function DashboardShell({
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <img src="/paypal-logo.svg" alt="" width={22} height={22} />
+          <Image src="/paypal-logo.svg" alt="" width={22} height={22} priority />
           <strong style={{ fontSize: '14px', letterSpacing: '0.02em' }}>
             PayPal Agentic Escrow
           </strong>

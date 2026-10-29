@@ -164,16 +164,16 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(ui): settlement matrix with ag-grid, client/freelancer panels, and unified dashboard`
 
-- [ ] 9. Wave 9: Deployment Config, Documentation & Pre-Flight Verification
-  - [ ] 9.1 Create `render.yaml`, `.env.example`, `LICENSE`, and `README.md`
+- [x] 9. Wave 9: Deployment Config, Documentation & Pre-Flight Verification
+  - [x] 9.1 Create `render.yaml`, `.env.example`, `LICENSE`, and `README.md`
     - Include `NEXT_PUBLIC_PAYPAL_CLIENT_ID` in `render.yaml` and `.env.example`
     - Document 60-second judge testing flow, architecture diagram, and exact 5 demo assertions
     - _Requirements: 11.1, 11.2, 11.3_
-  - [ ] 9.2 Run Pre-Flight Checklist
+  - [x] 9.2 Run Pre-Flight Checklist
     - Verify `npx tsc --noEmit` and `npm run build` succeed with zero errors
     - Verify end-to-end demo flow: Load default contract → Authorize $100 → Verify `v1-broken` ($80 captured, `finalCapture: false`) → Verify `v2-fixed` ($20 captured, `finalCapture: true`, status `COMPLETED`)
     - _Requirements: All_
-  - [ ] 9.3 Final Git Checkpoint: Commit and push release to `main`
+  - [x] 9.3 Final Git Checkpoint: Commit and push release to `main`
     - Run `npx tsc --noEmit`
     - Commit & push: `chore(release): final end-to-end integration verified release`
 

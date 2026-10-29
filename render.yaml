@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: paypal-agentic-escrow
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
+    disk:
+      name: paypal-agentic-escrow-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: NEXT_PUBLIC_PAYPAL_CLIENT_ID
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        value: "file:./data/dev.db"
+      - key: NEXT_PUBLIC_APP_URL
+        sync: false
+      - key: KERNEL_WS_ENDPOINT
+        sync: false
+        required: false
