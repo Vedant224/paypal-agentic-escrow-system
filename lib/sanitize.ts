@@ -30,16 +30,6 @@ const DANGEROUS_SELECTOR_PATTERN =
 
 const MAX_SELECTOR_LENGTH = 250;
 
-function getAppOrigin(): string {
-  const raw = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
-
-  try {
-    return new URL(raw).origin;
-  } catch {
-    return 'http://localhost:3000';
-  }
-}
-
 /**
  * The two official demo routes are the only internal URLs the verification
  * engine is allowed to navigate to. They are explicitly whitelisted so the
@@ -47,10 +37,12 @@ function getAppOrigin(): string {
  * for arbitrary loopback hosts.
  */
 function isOfficialDemoRoute(parsed: URL): boolean {
-  const allowedOrigins = new Set([getAppOrigin(), 'http://localhost:3000', 'http://127.0.0.1:3000']);
+  const allowedHosts = new Set(['localhost', '127.0.0.1', '::1', '[::1]']);
   const allowedPaths = new Set(['/demo/v1-broken', '/demo/v2-fixed']);
 
-  return allowedOrigins.has(parsed.origin) && allowedPaths.has(parsed.pathname);
+  // Demo paths on loopback are explicitly permitted during local/preview
+  // testing, on any port. Everything else on loopback stays blocked.
+  return allowedHosts.has(parsed.hostname.toLowerCase()) && allowedPaths.has(parsed.pathname);
 }
 
 export function isAllowedVerificationUrl(rawUrl: string): boolean {

@@ -19,8 +19,6 @@ import type { AssertionPrimitive } from './schemas';
 import { VerificationEngineError } from './errors';
 import { sanitizeTelemetry } from './sanitize';
 
-const FILE_NAME = 'verification-engine.ts';
-
 export interface VerificationResult {
   criterionId: string;
   passed: boolean;
@@ -67,8 +65,6 @@ export async function executeAssertion(
   page: Page,
   assertion: AssertionPrimitive,
 ): Promise<AssertionOutcome> {
-  const fnName = `${FILE_NAME}::executeAssertion`;
-
   switch (assertion.type) {
     case 'dom_exists': {
       const count = await page.locator(assertion.selector).count();
@@ -181,8 +177,6 @@ export async function executeAssertionSafe(
   criterionId: string,
   assertion: AssertionPrimitive,
 ): Promise<VerificationResult> {
-  const fnName = `${FILE_NAME}::executeAssertionSafe`;
-
   let timeoutHandle: ReturnType<typeof setTimeout> | undefined;
 
   try {
@@ -220,6 +214,5 @@ export async function executeAssertionSafe(
     if (timeoutHandle !== undefined) {
       clearTimeout(timeoutHandle);
     }
-    void fnName;
   }
 }

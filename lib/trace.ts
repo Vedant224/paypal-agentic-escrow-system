@@ -96,6 +96,8 @@ export function log(
   } else if (level === 'WARN') {
     console.warn(serialised);
   } else {
-    console.log(serialised);
+    // INFO logs go to stdout directly so the structured JSON is never prefixed
+    // by anything the runtime might add.
+    process.stdout.write(`${serialised}\n`);
   }
 }

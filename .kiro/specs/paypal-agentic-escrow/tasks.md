@@ -100,37 +100,37 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(engine): paypal sdk v2 client, agent toolkit, and safe verification engine`
 
-- [ ] 5. Wave 5: Backend API Routes (`app/api/`)
-  - [ ] 5.1 Create `GET /api/contract/[id]/route.ts`
+- [x] 5. Wave 5: Backend API Routes (`app/api/`)
+  - [x] 5.1 Create `GET /api/contract/[id]/route.ts`
     - Seed default demo contract if `id === "default"` and none exists
     - Return contract, criteria, captureLedger, verificationRuns (descending), and computed `totalCapturedCents`, `remainingAuthorizedCents`, and `passPercentage`
     - _Requirements: 18.1, 18.2, 18.3, 18.4_
-  - [ ] 5.2 Create `POST /api/contract/compile/route.ts` and `POST /api/contract/audit/route.ts`
+  - [x] 5.2 Create `POST /api/contract/compile/route.ts` and `POST /api/contract/audit/route.ts`
     - Validate request bodies with Zod schemas
     - Use Vercel AI SDK `generateObject` with `withRetry` (3 attempts) and fallback to deterministic demo assertions if OpenAI fails
     - Persist contract and criteria in integer cents inside `prisma.$transaction`
     - _Requirements: 1.1, 2.1, 12.4, 12.5, 16.1_
-  - [ ] 5.3 Create PayPal API routes (`create-order`, `authorize`, `void`)
+  - [x] 5.3 Create PayPal API routes (`create-order`, `authorize`, `void`)
     - Implement `POST /api/paypal/create-order/route.ts`
     - Implement `POST /api/paypal/authorize/route.ts` storing `paypalAuthorizationId` and `authorizationExpiresAt`
     - Implement `POST /api/paypal/void/route.ts`
     - _Requirements: 3.2, 3.4, 3.5, 5.7, 16.1_
-  - [ ] 5.4 Create `POST /api/verify-and-capture/route.ts`
+  - [x] 5.4 Create `POST /api/verify-and-capture/route.ts`
     - Enforce atomic `verificationInProgress` lock (return 409 if active) and reset in `finally`
     - Wrap browser context and browser instance in nested `try/finally` blocks
     - Calculate `deltaCaptureCents` from newly passed uncaptured criteria only
     - Execute `capturePayPalMilestone` if `deltaCaptureCents > 0`
     - Persist `Criterion`, `VerificationRun`, `CaptureLedger`, and `EscrowContract` status updates inside `prisma.$transaction`
     - _Requirements: 4.1, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 17.1, 17.2, 17.3, 17.4, 17.5_
-  - [ ] 5.5 Git Checkpoint: Commit and push Wave 5 to `main`
+  - [x] 5.5 Git Checkpoint: Commit and push Wave 5 to `main`
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(api): contract compile/audit, paypal orders v2, and locked delta verify-and-capture routes`
 
-- [ ] 6. Wave 6: Demo Deliverable Routes (`/demo/v1-broken` & `/demo/v2-fixed`)
-  - [ ] 6.1 Create `app/demo/v1-broken/page.tsx` (Passes 4/5 = 80%)
+- [x] 6. Wave 6: Demo Deliverable Routes (`/demo/v1-broken` & `/demo/v2-fixed`)
+  - [x] 6.1 Create `app/demo/v1-broken/page.tsx` (Passes 4/5 = 80%)
     - Render `#main-heading`, `.welcome-text` ("task management"), responsive container (`<= 375px`), `.primary-button` with blue background (`rgb(0, 0, 255)` failing expected green `rgb(34, 139, 34)`), and visible pass/fail indicator badges
     - _Requirements: 7.1, 7.3_
-  - [ ] 6.2 Create `app/demo/v2-fixed/page.tsx` (Passes 5/5 = 100%)
+  - [x] 6.2 Create `app/demo/v2-fixed/page.tsx` (Passes 5/5 = 100%)
     - Identical to `v1-broken` except `.primary-button` has `backgroundColor: 'rgb(34, 139, 34)'`
     - _Requirements: 7.2, 7.3_
   - [ ] 6.3 Git Checkpoint: Commit and push Wave 6 to `main`
