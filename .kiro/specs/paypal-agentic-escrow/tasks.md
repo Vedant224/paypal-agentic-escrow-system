@@ -150,17 +150,17 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(ui-core): reusable api-client, custom hooks, and ui primitives`
 
-- [ ] 8. Wave 8: Feature Panels & Unified Settlement Dashboard
-  - [ ] 8.1 Create `SettlementMatrix.tsx`, `CaptureLedger.tsx`, and `AgentTelemetry.tsx`
+- [x] 8. Wave 8: Feature Panels & Unified Settlement Dashboard
+  - [x] 8.1 Create `SettlementMatrix.tsx`, `CaptureLedger.tsx`, and `AgentTelemetry.tsx`
     - Configure AG Grid columns with `StatusBadge` and formatted USD cent values
     - Render chronological capture ledger and redacted agent telemetry logs
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 10.3_
-  - [ ] 8.2 Create `ClientPanel.tsx`, `FreelancerPanel.tsx`, and `app/page.tsx`
+  - [x] 8.2 Create `ClientPanel.tsx`, `FreelancerPanel.tsx`, and `app/page.tsx`
     - Wire PayPal `PayPalScriptProvider` (`intent: "authorize"`) and `PayPalButtons`
     - Add 1-click Demo Preset buttons (`Test v1-broken (4/5 -> $80)` and `Test v2-fixed (5/5 -> +$20)`) and copyable Sandbox credentials pill
     - Wrap every major dashboard section in `<ErrorBoundary>`
     - _Requirements: 6.6, 6.7, 7.4, 7.6, 13.1, 13.2_
-  - [ ] 8.3 Git Checkpoint: Commit and push Wave 8 to `main`
+  - [x] 8.3 Git Checkpoint: Commit and push Wave 8 to `main`
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(ui): settlement matrix with ag-grid, client/freelancer panels, and unified dashboard`
 

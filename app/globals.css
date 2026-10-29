@@ -1,6 +1,4 @@
-/* CSS @import rules must precede every other statement, so the AG Grid
-   stylesheets are pulled in first — before the project's own rules. */
-@import 'ag-grid-community/styles/ag-grid.css';
+/* AG Grid: only the theming-API stylesheet is needed (v33 theming API). */
 @import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 :root {
@@ -70,6 +68,24 @@ body {
   --ag-chip-background-color: #12121c;
   --ag-input-border-color: #26263a;
   --ag-input-background-color: #050508;
+}
+
+/* Role focus: dim the inactive role's panel and ring the active one, without
+   ever hiding the inactive controls. */
+.role-panel {
+  border-radius: 16px;
+  padding: 2px;
+  transition: opacity 250ms ease, box-shadow 250ms ease;
+}
+
+.role-panel[data-dimmed='true'] {
+  opacity: 0.5;
+}
+
+.role-panel[data-highlighted='true'] {
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.45),
+    0 0 40px rgba(37, 99, 235, 0.16);
 }
 
 /* Let the grid size itself to its container instead of the viewport. */

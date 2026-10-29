@@ -23,10 +23,6 @@ export interface DashboardShellProps {
   bottomRow: ReactNode;
 }
 
-function focusOpacity(isActive: boolean): number {
-  return isActive ? 1 : 0.55;
-}
-
 export function DashboardShell({
   clientFocus,
   freelancerFocus,
@@ -88,10 +84,20 @@ export function DashboardShell({
             gap: '18px',
           }}
         >
-          <div style={{ opacity: focusOpacity(clientFocus !== 'freelancer'), transition: 'opacity 250ms ease' }}>
+          <div
+            className="role-panel"
+            data-role="client"
+            data-dimmed={clientFocus === 'freelancer' ? 'true' : 'false'}
+            data-highlighted={clientFocus === 'client' ? 'true' : 'false'}
+          >
             {topRow}
           </div>
-          <div style={{ opacity: focusOpacity(freelancerFocus !== 'client'), transition: 'opacity 250ms ease' }}>
+          <div
+            className="role-panel"
+            data-role="freelancer"
+            data-dimmed={freelancerFocus === 'client' ? 'true' : 'false'}
+            data-highlighted={freelancerFocus === 'freelancer' ? 'true' : 'false'}
+          >
             {middleRow}
           </div>
         </div>
