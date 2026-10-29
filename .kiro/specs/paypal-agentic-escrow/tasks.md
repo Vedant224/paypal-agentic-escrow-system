@@ -137,16 +137,16 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(demo): demo deliverable routes v1-broken and v2-fixed`
 
-- [ ] 7. Wave 7: Reusable Frontend Client, Hooks & UI Primitives
-  - [ ] 7.1 Create `lib/api-client.ts` and custom hooks (`hooks/`)
+- [x] 7. Wave 7: Reusable Frontend Client, Hooks & UI Primitives
+  - [x] 7.1 Create `lib/api-client.ts` and custom hooks (`hooks/`)
     - Implement `apiFetch<T>(url, options)` automatically setting `Content-Type: application/json` and throwing `ApiClientError`
     - Implement `hooks/useContract.ts`, `hooks/useVerification.ts`, and `hooks/usePayPal.ts`
     - _Requirements: 16.3_
-  - [ ] 7.2 Create reusable UI components (`components/ui/` & `components/layout/`)
+  - [x] 7.2 Create reusable UI components (`components/ui/` & `components/layout/`)
     - Implement `Button.tsx`, `Input.tsx`, `Card.tsx`, `Spinner.tsx`, `StatusBadge.tsx`, and `ErrorBoundary.tsx`
     - Implement `DashboardShell.tsx` and `RoleHighlightToggle.tsx`
     - _Requirements: 6.2, 6.5, 13.2_
-  - [ ] 7.3 Git Checkpoint: Commit and push Wave 7 to `main`
+  - [x] 7.3 Git Checkpoint: Commit and push Wave 7 to `main`
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(ui-core): reusable api-client, custom hooks, and ui primitives`
 

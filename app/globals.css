@@ -1,3 +1,8 @@
+/* CSS @import rules must precede every other statement, so the AG Grid
+   stylesheets are pulled in first — before the project's own rules. */
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-quartz.css';
+
 :root {
   --bg: #050508;
   --surface: #0b0b12;
@@ -24,6 +29,54 @@ body {
   min-height: 100%;
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* AG Grid tokens tuned to the escrow palette (v33 theming API). */
+.ag-theme-quartz {
+  --ag-background-color: #0b0b12;
+  --ag-header-background-color: #050508;
+  --ag-odd-row-background-color: #08080f;
+  --ag-border-color: #1e1e2a;
+  --ag-row-border-color: #1e1e2a;
+  --ag-header-foreground-color: #8b8ba0;
+  --ag-foreground-color: #e8e8f0;
+  --ag-font-size: 13px;
+  --ag-font-family: inherit;
+  --ag-row-hover-color: #12121c;
+  --ag-selected-row-background-color: #12121c;
+  --ag-input-focus-border-color: #38bdf8;
+  --ag-active-color: #2563eb;
+  --ag-borders: none;
+  --ag-row-border-width: 1px;
+  --ag-header-column-resize-handle-color: #26263a;
+  --ag-control-panel-background-color: #0b0b12;
+  --ag-chip-background-color: #12121c;
+  --ag-input-border-color: #26263a;
+  --ag-input-background-color: #050508;
+}
+
+/* Let the grid size itself to its container instead of the viewport. */
+.ag-root-wrapper-body {
+  height: auto;
+}
+
 a {
   color: var(--sky);
   text-decoration: none;
@@ -35,4 +88,9 @@ a:hover {
 
 button {
   font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sky);
+  outline-offset: 2px;
 }
