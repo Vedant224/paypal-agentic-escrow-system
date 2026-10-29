@@ -82,15 +82,15 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(db): prisma schema with integer cents, verification run model, and demo seeder`
 
-- [ ] 4. Wave 4: PayPal SDK v2 Client, Agent Toolkit & Browser Verification Engine
-  - [ ] 4.1 Create `lib/paypal-client.ts` using `@paypal/paypal-server-sdk`
+- [x] 4. Wave 4: PayPal SDK v2 Client, Agent Toolkit & Browser Verification Engine
+  - [x] 4.1 Create `lib/paypal-client.ts` using `@paypal/paypal-server-sdk`
     - Initialize `Client`, `OrdersController`, and `PaymentsController` in Sandbox environment
     - Implement `createPayPalAuthorizeOrder`, `authorizePayPalOrder`, `capturePayPalMilestone`, and `voidPayPalAuthorization` wrapped with `withRetry` and `PayPalClientError`
     - _Requirements: 3.1, 3.2, 3.4, 5.5, 5.7_
-  - [ ] 4.2 Create `lib/agent-tools.ts` integrating `@paypal/agent-toolkit` and custom escrow tools
+  - [x] 4.2 Create `lib/agent-tools.ts` integrating `@paypal/agent-toolkit` and custom escrow tools
     - Initialize `@paypal/agent-toolkit` and define `authorizeEscrowOrderTool`, `captureProportionalMilestoneTool`, and `voidEscrowAuthorizationTool`
     - _Requirements: 10.1, 10.2_
-  - [ ] 4.3 Create `lib/browser-connector.ts` and `lib/verification-engine.ts`
+  - [x] 4.3 Create `lib/browser-connector.ts` and `lib/verification-engine.ts`
     - Implement `connectBrowser()` supporting `KERNEL_WS_ENDPOINT` CDP with local Chromium fallback
     - Implement `sortCriteriaForExecution()` so `http_status_ok` runs last
     - Implement `executeAssertion()` using `page.request.get()` for `http_status_ok` and `getComputedStyle(el).getPropertyValue()` for `computed_style`
