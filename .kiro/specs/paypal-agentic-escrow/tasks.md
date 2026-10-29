@@ -133,7 +133,7 @@ This implementation plan breaks down the PayPal Agentic Escrow System into wave-
   - [x] 6.2 Create `app/demo/v2-fixed/page.tsx` (Passes 5/5 = 100%)
     - Identical to `v1-broken` except `.primary-button` has `backgroundColor: 'rgb(34, 139, 34)'`
     - _Requirements: 7.2, 7.3_
-  - [ ] 6.3 Git Checkpoint: Commit and push Wave 6 to `main`
+  - [x] 6.3 Git Checkpoint: Commit and push Wave 6 to `main`
     - Run `npx tsc --noEmit`
     - Commit & push: `feat(demo): demo deliverable routes v1-broken and v2-fixed`
 
