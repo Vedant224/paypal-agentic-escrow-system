@@ -36,6 +36,7 @@ data/
 .DS_Store
 Thumbs.db
 desktop.ini
+.kiro
 
 # === Debug & Logs ===
 npm-debug.log*
